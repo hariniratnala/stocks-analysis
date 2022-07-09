@@ -2,71 +2,95 @@
 # Stock Analysis With Excel VBA
 Click here to view the Excel file: VBA Challenge - Stock Analysis
 
-# Overview of Project
+# Overview : VBA Stock Analysis Project
+
 ## Purpose
-The purpose of this project was to refactor a Microsoft Excel VBA code to collect certain stock information in the year 2017 and 2018 and determine whether or not the stocks are worth investing. This process was originally completed in a similar format, however, the goal for this round was to increase the efficiency of the original code.
 
-### The Data
-The data that is presented includes two charts with stock information on 12 different stocks. The stock information contains a ticker value, the date the stock was issued, the opening, closing and adjusted closing price, the highest and lowest price, and the volume of the stock. The goal is to retrieve the ticker, the total daily volume, and the return on each stock.
+In this project and analyisis, we’ll edit, or refactor, the Stock Market Dataset with VBA solution code to loop through all the data one time in order to collect an entire dataser. Then, we’ll determine whether refactoring your code successfully made the VBA script run faster. Finally, we just want to make the code more efficient—by taking fewer steps, using less memory, or improving the logic of the code to make it easier for future users to read.
 
-### Results
-Analysis
+### Analysis and Challenges
+
+Prepare our dataser VBA_Challenge.vbs file for the project.
+
+Create our resources folder in GitHub to hold the run-time pop-up messages that we’ll screenshot after running refactored analyses for 2017 and 2018.
+
+Create and convert our XLSM file from *.vbs dataset that you used in this module as VBA_Challenge.xlsm.
+
+Add the VBA_Challenge.vbs script to the Microsoft Visual Basic editor.
+
+Use the steps Refactor VBA code and measure performance to add code where indicated by the numbered comments in the starter code file.
+
+
+### Results:Refactor VBA Code and Measure Performance
+
+Deliverable Requirements, Code Examples, Compare Stock Performance and Timestamp procedure below:
+1. The tickerIndex is set equal to zero before looping over the rows.
+
+Created a tickerIndex variable and set it equal to zero before iterating over all the rows. Will use this tickerIndex to access the correct index across the four different arrays on VBA Code: the tickers array and the three output arrays created on next requierement.
+
+![Screenshot 2022-07-09 175643](https://user-images.githubusercontent.com/108489186/178125260-cc921da9-9d77-465b-a3d4-4498fff3f567.png)
+
+2. Arrays are created for tickers, tickerVolumes, tickerStartingPrices, and tickerEndingPrices.
+
+Created three output arrays: tickerVolumes, tickerStartingPrices, and tickerEndingPrices. In our VBA code, the tickerVolumes array should be a Long data type. But in our VBA code the tickerStartingPrices and tickerEndingPrices arrays should be a Single data type.
+
+![Screenshot 2022-07-09 175835](https://user-images.githubusercontent.com/108489186/178125273-d36901b2-4bd0-497e-9ce5-853327171709.png)
+
+3. The tickerIndex is used to access the stock ticker index for the tickers, tickerVolumes, tickerStartingPrices, and tickerEndingPrices arrays.
+
+Created a for loop to initialize the tickerVolumes to zero. And if the next row’s ticker doesn’t match, increase the tickerIndex.
+
+![Screenshot 2022-07-09 180035](https://user-images.githubusercontent.com/108489186/178125286-b2669390-cd5f-4c54-b271-cb722c9ae1e0.png)
+
+4. The script loops through stock data, reading and storing all of the following values from each row: tickers, tickerVolumes, tickerStartingPrices, and tickerEndingPrices.
+
+Created a loop that will loop over all the rows in the spreadsheet. Inside the loop, we created a script that increases the current tickerVolumes (stock ticker volume) variable and adds the ticker volume for the current stock ticker.
+
+![Screenshot 2022-07-09 180930](https://user-images.githubusercontent.com/108489186/178125300-bc11c85e-20d4-4921-9cac-aff5bf7dce71.png)
+
+5. Code for formatting the cells in the spreadsheet is working.
+
+We make positive returns green and negative returns red, to be a lot easier to determine which stocks did well and which ones didn't. Added some formatting based on the values of the returns.
+
+![Screenshot 2022-07-09 181208](https://user-images.githubusercontent.com/108489186/178125307-cfbc6303-f07e-4a3f-b3e7-6f25e6e21ebc.png)
+
+
+##Analysis
+
 Before refactoring the code, I began by copying the code that was needed to create the input box, chart headers, ticker array, and to activate the appropriate worksheet. The steps were then listed out in order to set the structure for the refactoring. Below is the instruction and code as written in the file.
 
-'1a) Create a ticker Index
-tickerIndex = 0
+![Screenshot 2022-07-09 181645](https://user-images.githubusercontent.com/108489186/178125328-4d975e34-8069-4c81-a9bc-2433bd33df4f.png)
 
-'1b) Create three output arrays
-Dim tickerVolumes(12) As Long
-Dim tickerStartingPrices(12) As Single
-Dim tickerEndingPrices(12) As Single
+ ###The outputs for the 2017 and 2018 stock analyses in the VBA_Challenge.xlsm workbook match the outputs from the AllStockAnalysis in the module
 
-''2a) Create a for loop to initialize the tickerVolumes to zero.
-' If the next row’s ticker doesn’t match, increase the tickerIndex.
-For i = 0 To 11
-    tickerVolumes(i) = 0
-    tickerStartingPrices(i) = 0
-    tickerEndingPrices(i) = 0
-Next i
+Finally, we run the stock analysis, to confirm that our stock analysis outputs for 2017 and 2018 are the same as dataset example provided (as shown in the images below, named Dataset Examples Provided). In adition, in our resources folder and below you can see the final Stock Analysis Results named, Final VBA Analysis 2017 and 2018 save the pop-up messages showing elapsed run time for the refactored code as VBA_Challenge_2017.png and VBA_Challenge_2018.png. Then, save the changes to your workbook.
 
-''2b) Loop over all the rows in the spreadsheet.
-For i = 2 To RowCount
+Final VBA Analysis 2017
 
-    '3a) Increase volume for current ticker
-    tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
-    
-    '3b) Check if the current row is the first row with the selected tickerIndex.
-    'If  Then
-    If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i - 1, 1).Value <> tickers(tickerIndex) Then
-        tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
-    End If
-    
-    '3c) check if the current row is the last row with the selected ticker
-    'If  Then
-     If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i + 1, 1).Value <> tickers(tickerIndex) Then
-        tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
-     End If
+![1VBA_Challenge_2017](https://user-images.githubusercontent.com/108489186/178125358-fe6ca921-bc7c-4f47-9ce8-7f9215998938.png)
 
-        '3d Increase the tickerIndex.
-         If Cells(i, 1).Value = tickers(tickerIndex) And Cells(i + 1, 1).Value <> tickers(tickerIndex) Then
-            tickerIndex = tickerIndex + 1
-        End If
+Final VBA Analysis 2018
 
-Next i
+![1VBA _Challenge_2018](https://user-images.githubusercontent.com/108489186/178125370-76462a0f-9011-4f6c-a156-7f70c1d114ff.png)
 
-'4) Loop through your arrays to output the Ticker, Total Daily Volume, and Return.
-For i = 0 To 11
-    
-    Worksheets("All Stocks Analysis").Activate
-    Cells(4 + i, 1).Value = tickers(i)
-    Cells(4 + i, 2).Value = tickerVolumes(i)
-    Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
-    
-Next i
-Summary
-Pros and Cons of Refactoring Code
-Refactoring helps make our code cleaner and more organized. A few advantages of a cleaner code include design and software improvement, debugging, and faster programming. It may also benefit other users who view our projects because it becomes easier to read, as it is more concise and straightforward. However, we do not always have the luxury to refactor our code due to disadvantages. These disadvantages may range from having applications that are too large to not having the proper test cases for the existing codes, which may ultimately pose some risk if we try to refactor our code.
+## SUMMARY
 
-The Advantages of Refactoring Stock Analysis
-The biggest benefit that occurred as a result of the refactoring was an decrease in macro run time. The original analysis took approximately one second to run, whereas our new analysis only took about a four of the time (approximately 0.25 seconds) to run. Attached below are the screenshots that indicate the run time for our new analysis.
+###Deliverable with detail analysis:
+1. What are the advantages or disadvantages of refactoring code?
+
+You need to perform code refactoring in small steps. Make tiny changes in your program, each of the small changes makes your code slightly better and leaves the application in a working state.
+
+###Disadvantages:
+
+A long procedure may contain the same line of code in several locations, you can change the logic to eliminate the duplicate lines.
+A complex unstructured code is usually best to split in several functions.
+Refactoring process can affect the testing outcomes.
+
+###Advantages:
+
+Logical errors easily appear in well structure code that contains nested conditionals and loops.
+In our case, using Excel flow displays program logic in a more comprehensible manner, not tied to the order that the underlying code is written.
+VBA interpretation (Excel) of code can reveal patterns that are not easy to see in the source.
+
+
 
